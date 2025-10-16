@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Cura Companion</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* FAQ Section */
+    .faq-section {
+      padding: 80px 0;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 30px;
+      color: var(--primary-color);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      color: var(--secondary-text);
+      transition: max-height 0.3s ease-out;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      margin-top: 10px;
+    }
+
+    .faq-item.active .faq-question::after {
+      content: "−";
+    }
+
+    .faq-question::after {
+      content: "+";
+      font-size: 24px;
+      color: var(--primary-color);
+      transition: transform 0.3s;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="logo.svg" alt="Company Logo" class="logo-img">
+        <h2>Cura Companion</h2>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="faq.html" class="active">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-question">What is Cura Companion?</div>
+    <div class="faq-answer">
+      Cura Companion is a digital platform designed to support caregivers with resources, mental health tools, and interactive guidance.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Who can use Cura Companion?</div>
+    <div class="faq-answer">
+      It’s built for family caregivers, healthcare aides, and anyone providing long-term care to loved ones or patients.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Is Cura Companion free to use?</div>
+    <div class="faq-answer">
+      Yes! The basic version is free, offering access to caregiver tips, stress management tools, and daily guidance.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Do I need any technical knowledge to use it?</div>
+    <div class="faq-answer">
+      Not at all. The platform is designed to be simple and intuitive, even for those with little or no digital experience.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Does Cura Companion provide emergency help?</div>
+    <div class="faq-answer">
+      While Cura Companion offers guidance and mental health support, it does not replace emergency medical services. Always contact local emergency numbers in urgent situations.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Can I access Cura Companion on mobile devices?</div>
+    <div class="faq-answer">
+      Yes, it’s fully responsive and works on smartphones, tablets, and desktops.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Is my personal data safe?</div>
+    <div class="faq-answer">
+      Absolutely. We follow strict privacy protocols to ensure that your data remains secure and confidential at all times.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">How can I contact the support team?</div>
+    <div class="faq-answer">
+      You can email us at <a href="mailto:support@curacompanion.com">support@curacompanion.com</a> or use the “Contact Us” form on our website.
+    </div>
+  </div>
+</section>
+
+  <script>
+    // Toggle FAQ visibility
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

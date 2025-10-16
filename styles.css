@@ -109,13 +109,14 @@ body {
   flex-direction: column; 
   justify-content: center;
   align-items: center; 
-  color: white;
+  color: rgb(255, 255, 255);
 }
 .photo h1{
   font-size: 7vh;
 }
 .photo p{
   font-size: 3vh;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
 }
 .highlight {
   color: var(--primary-color);
