@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ | Cura Companion</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');</style>
   <link rel="stylesheet" href="styles.css">
   <style>
     :root {
@@ -15,7 +16,6 @@
   --font-family: "Figtree", sans-serif;
 }
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
       background: var(--bg-color);
@@ -55,7 +55,7 @@
       text-align: center;
       font-size: 40px;
       margin-bottom: 40px;
-      color: #009879;
+      color: var(--primary-color);
     }
 
     .faq-item {
@@ -82,7 +82,7 @@
     }
 
     .faq-item.active .faq-answer {
-      max-height: 500px; /* Enough height for longer answers */
+      max-height: 500px; 
       opacity: 1;
       margin-top: 10px;
     }
@@ -90,7 +90,7 @@
     .faq-question::after {
       content: "+";
       font-size: 24px;
-      color: #009879;
+      color: var(--primary-color);
       transition: transform 0.3s;
     }
 
@@ -130,22 +130,13 @@
 
 <body>
   <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <div class="logo">
-        <h2>Cura Companion</h2>
-      </div>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="faq.html" class="active">FAQ</a>
-      </nav>
-    </div>
-  </header>
+  <div id="header"></div>
+  
 
   <!-- FAQ SECTION -->
   <section class="faq-section">
     <h2>Frequently Asked Questions</h2>
-
+    
     <div class="faq-item">
       <div class="faq-question">What is Cura Companion?</div>
       <div class="faq-answer">
@@ -204,6 +195,7 @@
   </section>
 
   <!-- SCRIPT -->
+  <script src="header.js"></script>
   <script>
     // Toggle FAQ items open/close
     document.querySelectorAll('.faq-item').forEach(item => {

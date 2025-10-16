@@ -1,3 +1,4 @@
+
 function changeAboutMeText()
 {
     const aboutMeText = ["Caregiver Support", "Medication Management", "Real-Time Assistance", "Elderly Care Made Easy"]
