@@ -95,6 +95,13 @@ body {
   color: #fff;
   box-shadow:  0 0 10px var(--primary-color);
 }
+.photo{
+  background:  rgb(195, 253, 255); ;
+  padding: 60px 0;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
@@ -138,7 +145,7 @@ body {
     width: 100%;
     align-items: left;
     opacity: 1;
-    background: rgb(195, 253, 255);;  
+    background: rgb(195, 253, 255);  
   }
   .nav-links.active {
     display: flex;
