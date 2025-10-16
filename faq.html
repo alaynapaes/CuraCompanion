@@ -6,24 +6,55 @@
   <title>FAQ | Cura Companion</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* FAQ Section */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    header.navbar {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 40px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .nav-links a.active {
+      color: #009879; /* Your theme color */
+    }
+
+    /* ===== FAQ SECTION ===== */
     .faq-section {
-      padding: 80px 0;
-      max-width: 800px;
-      margin: auto;
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
     }
 
     .faq-section h2 {
       text-align: center;
       font-size: 40px;
-      margin-bottom: 30px;
-      color: var(--primary-color);
+      margin-bottom: 40px;
+      color: #009879;
     }
 
     .faq-item {
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ccc;
       padding: 20px 0;
       cursor: pointer;
+      transition: all 0.3s;
     }
 
     .faq-question {
@@ -36,33 +67,64 @@
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      color: var(--secondary-text);
-      transition: max-height 0.3s ease-out;
+      color: #555;
+      line-height: 1.6;
+      transition: max-height 0.3s ease-out, opacity 0.3s ease;
+      opacity: 0;
     }
 
     .faq-item.active .faq-answer {
-      max-height: 200px;
+      max-height: 500px; /* Enough height for longer answers */
+      opacity: 1;
       margin-top: 10px;
+    }
+
+    .faq-question::after {
+      content: "+";
+      font-size: 24px;
+      color: #009879;
+      transition: transform 0.3s;
     }
 
     .faq-item.active .faq-question::after {
       content: "−";
     }
 
-    .faq-question::after {
-      content: "+";
-      font-size: 24px;
-      color: var(--primary-color);
-      transition: transform 0.3s;
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .faq-section h2 {
+        font-size: 32px;
+      }
+      .faq-question {
+        font-size: 16px;
+      }
+      .faq-answer {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .faq-section h2 {
+        font-size: 28px;
+      }
+      .faq-item {
+        padding: 15px 0;
+      }
+      .faq-question {
+        font-size: 14px;
+      }
+      .faq-answer {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="container nav-container">
       <div class="logo">
-        <img src="logo.svg" alt="Company Logo" class="logo-img">
         <h2>Cura Companion</h2>
       </div>
       <nav class="nav-links">
@@ -74,67 +136,68 @@
 
   <!-- FAQ SECTION -->
   <section class="faq-section">
-  <h2>Frequently Asked Questions</h2>
+    <h2>Frequently Asked Questions</h2>
 
-  <div class="faq-item">
-    <div class="faq-question">What is Cura Companion?</div>
-    <div class="faq-answer">
-      Cura Companion is a digital platform designed to support caregivers with resources, mental health tools, and interactive guidance.
+    <div class="faq-item">
+      <div class="faq-question">What is Cura Companion?</div>
+      <div class="faq-answer">
+        Cura Companion is a digital platform designed to support caregivers with resources, mental health tools, and interactive guidance.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">Who can use Cura Companion?</div>
-    <div class="faq-answer">
-      It’s built for family caregivers, healthcare aides, and anyone providing long-term care to loved ones or patients.
+    <div class="faq-item">
+      <div class="faq-question">Who can use Cura Companion?</div>
+      <div class="faq-answer">
+        It’s built for family caregivers, healthcare aides, and anyone providing long-term care to loved ones or patients.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">Is Cura Companion free to use?</div>
-    <div class="faq-answer">
-      Yes! The basic version is free, offering access to caregiver tips, stress management tools, and daily guidance.
+    <div class="faq-item">
+      <div class="faq-question">Is Cura Companion free to use?</div>
+      <div class="faq-answer">
+        Yes! The basic version is free, offering access to caregiver tips, stress management tools, and daily guidance.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">Do I need any technical knowledge to use it?</div>
-    <div class="faq-answer">
-      Not at all. The platform is designed to be simple and intuitive, even for those with little or no digital experience.
+    <div class="faq-item">
+      <div class="faq-question">Do I need any technical knowledge to use it?</div>
+      <div class="faq-answer">
+        Not at all. The platform is designed to be simple and intuitive, even for those with little or no digital experience.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">Does Cura Companion provide emergency help?</div>
-    <div class="faq-answer">
-      While Cura Companion offers guidance and mental health support, it does not replace emergency medical services. Always contact local emergency numbers in urgent situations.
+    <div class="faq-item">
+      <div class="faq-question">Does Cura Companion provide emergency help?</div>
+      <div class="faq-answer">
+        While Cura Companion offers guidance and mental health support, it does not replace emergency medical services. Always contact local emergency numbers in urgent situations.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">Can I access Cura Companion on mobile devices?</div>
-    <div class="faq-answer">
-      Yes, it’s fully responsive and works on smartphones, tablets, and desktops.
+    <div class="faq-item">
+      <div class="faq-question">Can I access Cura Companion on mobile devices?</div>
+      <div class="faq-answer">
+        Yes, it’s fully responsive and works on smartphones, tablets, and desktops.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">Is my personal data safe?</div>
-    <div class="faq-answer">
-      Absolutely. We follow strict privacy protocols to ensure that your data remains secure and confidential at all times.
+    <div class="faq-item">
+      <div class="faq-question">Is my personal data safe?</div>
+      <div class="faq-answer">
+        Absolutely. We follow strict privacy protocols to ensure that your data remains secure and confidential at all times.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <div class="faq-question">How can I contact the support team?</div>
-    <div class="faq-answer">
-      You can email us at <a href="mailto:support@curacompanion.com">support@curacompanion.com</a> or use the “Contact Us” form on our website.
+    <div class="faq-item">
+      <div class="faq-question">How can I contact the support team?</div>
+      <div class="faq-answer">
+        You can email us at <a href="mailto:support@curacompanion.com">support@curacompanion.com</a> or use the “Contact Us” form on our website.
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- SCRIPT -->
   <script>
-    // Toggle FAQ visibility
+    // Toggle FAQ items open/close
     document.querySelectorAll('.faq-item').forEach(item => {
       item.addEventListener('click', () => {
         item.classList.toggle('active');
