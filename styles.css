@@ -49,6 +49,9 @@ body {
 .nav-links a.contact{
   display: none;
 }
+.nav-links a.active {
+  color:var(--primary-color);
+}
 .logo {
   display: flex;
   gap: 10px;
