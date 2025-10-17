@@ -6,17 +6,27 @@
   <link ref="stylesheet "href="styles.css">
   <link
   <title>Login Page</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');</style>
+  <link rel="stylesheet" href="styles.css">
   <style>
+    :root {
+  --primary-color: rgb(22, 197, 203);
+  --text-color: rgba(0, 0, 0, 1);
+  --secondary-text: rgba(89, 89, 89, 1);
+  --bg-color: #fff;
+  --light-color: rgb(195, 253, 255);
+  --font-family: "Figtree", sans-serif;
+}
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      background: var(--bg-color);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
     .login-container {
-      background: white;
+      background: var(--bg-color);
       padding: 40px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -37,14 +47,14 @@
     .login-container button {
       width: 100%;
       padding: 10px;
-      background-color: #4CAF50;
+      background-color: var(--primary-color);
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
     .login-container button:hover {
-      background-color: #45a049;
+      background-color: var(--primary-color);
     }
   </style>
 </head>
