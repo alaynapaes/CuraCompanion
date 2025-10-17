@@ -16,12 +16,15 @@
   --font-family: "Figtree", sans-serif;
 }
     body {
-      font-family: Arial, sans-serif;
       background: var(--bg-color);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
+    }
+    #header{
+      width: 100%;
     }
     .login-container {
       background: var(--bg-color);
@@ -29,6 +32,8 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       width: 300px;
+      margin-top: auto;
+      margin-bottom: auto;
     }
     .login-container h2 {
       text-align: center;
@@ -58,6 +63,7 @@
 </head>
 <body>
      <div id="header"></div>
+  
   <div class="login-container">
     <h2>Login</h2>
     <form action="/login" method="post">
@@ -70,5 +76,8 @@
       <button type="submit">Login</button>
     </form>
   </div>
+  
+  <script src="header.js"></script>
+
 </body>
 </html>
