@@ -108,7 +108,7 @@ body {
   box-shadow:  0 0 10px var(--primary-color);
 }
 .photo{
-  background: url("photo4.png") no-repeat center center ;
+  background: url("photo.png") no-repeat center center ;
   background-size: cover;
   height: 75vh;
   overflow: hidden;
