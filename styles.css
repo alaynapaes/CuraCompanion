@@ -1,7 +1,7 @@
 :root {
   --primary-color: rgb(22, 197, 203);
   --text-color: rgba(0, 0, 0, 1);
-  --secondary-text: rgb(89, 89, 89);
+  --secondary-text: rgba(89, 89, 89, 1);
   --bg-color: #fff;
   --light-color: rgb(195, 253, 255);
   --font-family: "Figtree", sans-serif;
@@ -242,11 +242,11 @@ body {
     grid-template-columns: 1fr 1fr;
   }
   .nav-container {
-    flex-wrap: wrap;
+    flex-wrap: wrap;         
   }
 
   .gtq {
-    display: none;
+    display: none;   
   }
 
   .nav-links.active + .nav-cta {
