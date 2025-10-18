@@ -108,7 +108,7 @@ body {
   box-shadow:  0 0 10px var(--primary-color);
 }
 .photo{
-  background: url("photo4.png") no-repeat center center ;
+  background: url("home_bg_photo.png") no-repeat center center ;
   background-size: cover;
   height: 90vh;
   overflow: hidden;
@@ -242,11 +242,11 @@ body {
     grid-template-columns: 1fr 1fr;
   }
   .nav-container {
-    flex-wrap: wrap;         
+    flex-wrap: wrap;
   }
 
   .gtq {
-    display: none;   
+    display: none;
   }
 
   .nav-links.active + .nav-cta {
