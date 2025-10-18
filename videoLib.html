@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Library | Cura Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+    /* ---- Theme colors and fonts ---- */
+
+    :root {
+        --text-color: rgba(0, 0, 0, 1);
+        --secondary-text: rgba(89, 89, 89, 1);
+        --bg-color: #fff;
+        --light-color: rgb(195, 253, 255);
+        --font-family: "Figtree", sans-serif;
+        --primary-color: rgb(22, 197, 203);
+    }
+
+/*for 3 boxes*/
+.features {
+    text-align: center;
+    padding: 60px 30px;
+}
+
+.section-title {
+    margin-bottom: 30px;
+    color: #222;
+    font-size: 28px;
+}
+
+.features-grid {
+    flex-wrap: wrap;           /* allows wrapping on smaller screens */
+    gap: 50px;                 /* space between cards */
+    justify-content: center;   /* center them horizontally */
+    display: flex;
+}
+
+.feature-card {
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s;
+    text-align: center;
+    background: var(--bg-color);
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+}
+
+.feature-card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color:var(--bg-color);
+    color:var(--primary-color);
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: var(--light-color);
+}
+
+@media (max-width: 900px) {
+    .feature-card {
+    width: 45%;
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-card {
+    width: 100%;
+    }
+}
+</style>
+
+<!--navbar-->
+<div id="header"></div>
+
+<main>
+    <section class="features">
+    <div class="container">
+        <h2 class="section-title">
+        <span class="highlight">Explore caregiver training and support videos.</span><br>
+        <span style="color:var(--secondary-text); font-weight: 600;">Learn, grow, and care with confidence and compassion.</span>
+        </h2>
+    </div>
+
+        <div class="features-grid">
+        <div class="feature-card">
+        <img src="c.png" alt=""><br>
+<!--<h4>Lorem ipsum dolor sit amet consectetur adipisicing.</h4>-->
+            <a href="training.html" class="btn-primary">medical and physical care training</a>
+        </div>
+
+        <div class="features-grid">
+        <div class="feature-card">
+        <img src="c.png" alt=""><br>
+<!--<h4>Lorem ipsum dolor sit amet consectetur adipisicing.</h4>-->
+            <a href="healthSupport.html" class="btn-primary">Emotional and Mental health support</a>
+        </div>
+
+        <div class="features-grid">
+        <div class="feature-card">
+        <img src="c.png" alt=""><br>
+<!--<h4>Lorem ipsum dolor sit amet consectetur adipisicing.</h4>-->
+            <a href="Equipment.html" class="btn-primary">Medical Equipment Training</a>
+        </div>
+
+    </section>
+</main>
+
+<!-- SCRIPT -->
+<script src="header.js"></script>
+<script>
+    // Toggle FAQ items open/close
+    document.querySelectorAll('.video-card').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+    </script>
+
+</html>
