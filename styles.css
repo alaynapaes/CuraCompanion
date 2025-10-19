@@ -130,6 +130,10 @@ body {
 .highlight {
   color: var(--primary-color);
 }
+footer {
+  position: relative;
+  z-index: 10000;
+}
 
 /* COLUMNS SECTION */
 .features {
