@@ -12,44 +12,47 @@
       padding: 0;
       height: 100%;
       font-family: "Figtree", sans-serif;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Blurred background image */
     .background {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url(signup_photo.png); /* Replace with actual image path */
-      background-size: cover;
+      background-image: url(signup_photo.png); 
       background-position: center;
       filter: blur(8px);
       z-index: -2;
     }
 
-    /* Turquoise overlay */
     .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(45, 206, 218, 0.6); /* Turquoise tint */
+      background-color: rgba(45, 206, 218, 0.4);
       z-index: -1;
     }
-
-    /* Sign-up form container */
+.signup-section {
+  position: relative;
+  min-height: 90vh;   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
     .signup-container {
       position: relative;
       max-width: 350px;
       margin: auto;
-      top: 50%;
-      transform: translateY(-50%);
       background-color: #ffffff; 
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 1;
     }
 
     .signup-container h2 {
@@ -86,8 +89,8 @@
   </style>
 </head>
 <body>
+  <section class="signup-section">
   <div id="header"></div>
-  
   <div class="background"></div>
   <div class="overlay"></div>
 
@@ -100,6 +103,7 @@
       <button type="submit">Sign Up</button>
     </form>
   </div>
+  </section>
   <script src="header.js"></script>
     <div id="footer"></div>
   <script src="footer.js"></script>

@@ -12,6 +12,8 @@
       padding: 0;
       height: 100%;
       font-family: "Figtree", sans-serif;
+      display: flex;
+      flex-direction: column;
     }
 
     .background {
@@ -20,8 +22,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url(signup_photo.png); /* Replace with actual image path */
-      background-size: cover;
+      background-image: url(signup_photo.png); 
       background-position: center;
       filter: blur(8px);
       z-index: -2;
@@ -36,17 +37,22 @@
       background-color: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
-
+.login-section {
+  position: relative;
+  min-height: 90vh;   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
     .login-box {
       position: relative;
       max-width: 350px;
       margin: auto;
-      top: 50%;
-      transform: translateY(-50%);
       background-color: #ffffff; 
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      z-index: 1;
     }
 
     .login-box h2 {
@@ -82,10 +88,12 @@
   </style>
 </head>
 <body>
+
+  <section class="login-section">
    <div id="header"></div>
    <div class="background"></div>
   <div class="overlay"></div>
-
+ 
   <div class="login-box">
     <h2>Login</h2>
     <form action="/submit-signup" method="POST">
@@ -94,6 +102,7 @@
       <button type="submit">Login</button>
     </form>
   </div>
+</section>
     <script src="header.js"></script>
       <div id="footer"></div>
   <script src="footer.js"></script>

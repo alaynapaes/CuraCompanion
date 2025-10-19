@@ -10,8 +10,6 @@ footer.innerHTML = `
   font-size: 18px; 
   margin-top: 60px; 
   width: 100%; 
-  position: relative; 
-  z-index: 1;
 ">
   <div style="display:flex; flex-wrap:wrap; justify-content:space-between; max-width:1200px; margin:auto;">
     
