@@ -16,6 +16,26 @@
       flex-direction: column;
     }
 
+  .top-right-home {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  background-color: rgba(45, 206, 218, 0.8);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.top-right-home:hover {
+  background-color: #333;
+}
+
     .background {
       position: fixed;
       top: 0;
@@ -86,9 +106,15 @@
     .signup-container button:hover {
       background-color: #333333;
     }
+
+
+
   </style>
 </head>
 <body>
+
+<button class="top-right-home" onclick="window.location.href='/index.html'">Home</button>
+
   <section class="signup-section">
   <div id="header"></div>
   <div class="background"></div>

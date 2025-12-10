@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Page</title>
   <style>@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');</style>
-    <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css"/>
   <style>
     html, body {
       margin: 0;
@@ -37,13 +37,15 @@
       background-color: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
-.login-section {
-  position: relative;
-  min-height: 90vh;   
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
+    .login-section {
+      position: relative;
+      min-height: 90vh;   
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .login-box {
       position: relative;
       max-width: 350px;
@@ -85,56 +87,83 @@
     .login-box button:hover {
       background-color: #333333;
     }
+  
+  .top-right-home {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 999;   /* <-- important */
+  background-color: rgba(45, 206, 218, 0.8);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+
+.top-right-home:hover {
+  background-color: #333;
+}
+
+    
   </style>
 </head>
 <body>
+  <!-- NAVBAR -->
+  <div id="header"></div> 
 
   <section class="login-section">
-   <div id="header"></div>
-   <div class="background"></div>
-  <div class="overlay"></div>
- 
-  <div class="login-box">
-    <h2>Login</h2>
-    <form action="/submit-signup" method="POST">
-      <input type="text" id="username" placeholder="Username" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
-  </div>
-</section>
-    <script src="header.js"></script>
-      <div id="footer"></div>
+    <div class="background"></div>
+    <div class="overlay"></div>
+
+    <button class="top-right-home" onclick="window.location.href='/index.html'">Home</button>
+
+    <div class="login-box">
+      <h2>Login</h2>
+      <form action="/submit-signup" method="POST">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script src="header.js"></script>
   <script src="footer.js"></script>
   <script>
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault(); // stop page reload
-  const username = document.querySelector("#username").value;
-  const password = document.querySelector("#password").value;
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault(); // stop page reload
+      const username = document.querySelector("#username").value;
+      const password = document.querySelector("#password").value;
 
-  try {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Login successful!");
+          console.log(data);
+          // you can redirect to another page here
+          // window.location.href = "dashboard.html";
+        } else {
+          alert(data.message || "Invalid credentials");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Error connecting to server");
+      }
     });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert("Login successful!");
-      console.log(data);
-      // you can redirect to another page here
-      // window.location.href = "dashboard.html";
-    } else {
-      alert(data.message || "Invalid credentials");
-    }
-  } catch (error) {
-    console.error(error);
-    alert("Error connecting to server");
-  }
-});
-</script>
-
+  </script>
 </body>
 </html>
