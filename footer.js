@@ -1,6 +1,6 @@
 const footer = document.getElementById("footer");
 
-footer.innerHTML = `
+footer.innerHTML =`
 
 <footer style=" 
   background: black ;
@@ -26,9 +26,8 @@ footer.innerHTML = `
       <h3>Quick Links</h3>
       <ul style="list-style:none; padding:0;">
         <li><a href="#" style="color:white; text-decoration:none;">Home</a></li>
-        <li><a href="#" style="color:white; text-decoration:none;">Services</a></li>
-        <li><a href="#" style="color:white; text-decoration:none;">About Us</a></li>
-        <li><a href="#" style="color:white; text-decoration:none;">Contact</a></li>
+        <li><a href="faq.html" style="color:white; text-decoration:none;">About Us</a></li>
+        <li><a href="mailto:kavyawanjari@gmail.com?subject=Website%20Inquiry">Contact</a></li>
       </ul>
     </div>
 
