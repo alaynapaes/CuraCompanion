@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js'></script>
+     <link rel="stylesheet" href="css/style.css">
+        <script defer src="js/header.js"></script>
+        <script defer src="js/calendar.js"></script>
+
+        <style>
+      /* Make calendar smaller and centered */
+      #calendar {
+       width: 95%;          /* almost full width of the screen */
+    max-width: 1200px;   /* optional max width for very large screens */
+    margin: 30px auto;   /* center it */
+    height: 700px;
+        /* reasonable height */
+     /* fixed height, adjust as needed */
+      }
+
+      /* Responsive adjustments for smaller screens */
+      @media (max-width: 768px) {
+        #calendar {
+          max-width: 100%;
+          font-size: 0.8rem;
+          height: 500px; /* reduce vertical height */
+        }
+      }
+
+      @media (max-width: 480px) {
+        #calendar {
+          font-size: 0.75rem;
+          height: 400px;
+        }
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        // Load medications and vaccines from localStorage
+        const meds = JSON.parse(localStorage.getItem("medications")) || [];
+  
+const medEvents = [];
+meds.forEach(med => {
+    // Base date: use stored startDate or default to today
+    const baseDate = med.startDate ? new Date(med.startDate) : new Date();
+    const duration = med.duration || 1;
+    const titleParts = [med.name];
+    if (med.dose) titleParts.push(`— ${med.dose}`);
+    if (med.notes) titleParts.push(`(${med.notes})`);
+    const title = titleParts.join(' ');
+    if (med.frequency === "Daily") {
+        // One event each day for `duration` days
+        for (let i = 0; i < duration; i++) {
+            let eventDate = new Date(baseDate);
+            eventDate.setDate(baseDate.getDate() + i);
+            medEvents.push({
+                title: title,
+                start: eventDate.toISOString().split('T')[0],
+                allDay: true,
+                color: med.color || '#9ad3d6',
+                textColor: 'black'
+            });
+        }
+    } 
+    else if (med.frequency === "Weekly") {
+        // One event every 7 days, up to `duration` days
+        for (let i = 0; i < duration; i += 7) {
+            let eventDate = new Date(baseDate);
+            eventDate.setDate(baseDate.getDate() + i);
+            medEvents.push({
+                title: title,
+                start: eventDate.toISOString().split('T')[0],
+                allDay: true,
+                color: med.color || '#9ad3d6',
+                textColor: 'black'
+            });
+        }
+    } 
+    else {
+        // If no frequency, treat as single event
+        medEvents.push({
+            title: title,
+            start: baseDate.toISOString().split('T')[0],
+            allDay: true,
+            color: med.color || '#9ad3d6',
+            textColor: 'black'
+        });
+    }
+});
+// Vaccines events (unchanged)
+const vaccs = JSON.parse(localStorage.getItem("vaccines")) || [];
+const vaccEvents = vaccs.map(v => {
+    const date = new Date(v.date);
+    const parts = [v.name];
+    if (v.notes) parts.push(`(${v.notes})`);
+    return {
+        title: parts.join(' '),
+        start: date.toISOString().split('T')[0],
+        allDay: true,
+        color: '#ffd6e0',
+        textColor: 'black'
+    };
+});
+// Initialize calendar with combined events
+var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    events: [...medEvents, ...vaccEvents]
+});
+
+        calendar.render();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <div id='calendar'></div>
+        <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 MedReminder. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="add_medication.html">Add Medication</a>
+                <a href="add_vaccine.html">Add Vaccine</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+  </body>
+</html>
