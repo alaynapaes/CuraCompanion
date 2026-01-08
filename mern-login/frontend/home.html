@@ -63,15 +63,34 @@
             font-weight: 800;
             text-transform: capitalize;
         }
+        .reminder {
+        background-color: #16c5cb;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <a href="/index.html">
         <button class="logout">log out</button>
-        <h1 class="greeting"></h1>
-    </div>
+    </a>
+    <a href="/reminder/">
+        <button class="reminder">Reminder</button>
+    </a>
+
 
     <script src="home.js"></script>
+    <!-- Mount point for AI chat -->
+<div id="ai-chat-root"></div>
+
+<!-- Load React chat -->
+<script type="module" src=".react-chat/src/chatEntry.tsx"></script>
+
 </body>
 </html>

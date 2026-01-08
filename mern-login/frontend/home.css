@@ -12,7 +12,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-     background:url('../extra_photo.png');
+    background:url('../extra_photo.png');
     backdrop-filter: blur(3px);
     background-size: cover;
     background-position: center;
