@@ -1,19 +1,22 @@
-window.onload = () => {
-    const greeting = document.querySelector('.greeting');
-    const logout = document.querySelector('.logout');
+window.addEventListener("DOMContentLoaded", () => {
+    const greeting = document.querySelector(".greeting");
+    const logoutBtn = document.querySelector(".logout");
 
-    // Redirect to login if not logged in
-    if (!sessionStorage.name) {
-        location.href = '/login';
+    // Get user name from sessionStorage
+    const name = sessionStorage.getItem("name");
+
+    // If user is not logged in, redirect to login
+    if (!name) {
+        window.location.href = "login.html";
         return;
     }
 
     // Show greeting
-    greeting.innerHTML = `Hello ${sessionStorage.name}`;
+    greeting.textContent = `Hello ${name}`;
 
-    // Logout button
-    logout.onclick = () => {
-        sessionStorage.clear();
-        location.href = '/login'; // redirect to login
-    };
-};
+    // Logout functionality
+    logoutBtn.addEventListener("click", () => {
+        sessionStorage.clear();   // clear session
+        window.location.href = "login.html"; // redirect to login
+    });
+});

@@ -45,22 +45,23 @@ app.post('/signup', (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-        return res.send("Please fill all the fields");
+        return res.type("text").send("Please fill all the fields");
     }
 
     db("users")
-        .insert({ name, email, password })
-        .then(() => {
-            res.send("Signup successful");
-        })
-        .catch(err => {
-            if (err.detail && err.detail.includes('already exists')) {
-                res.send("Email already exists");
-            } else {
-                res.send("Error inserting user");
-            }
-        });
+      .insert({ name, email, password })
+      .then(() => {
+          res.type("text").send("Signup successful");
+      })
+      .catch(err => {
+          if (err.detail && err.detail.includes('already exists')) {
+              res.type("text").send("Email already exists");
+          } else {
+              res.type("text").send("Error inserting user");
+          }
+      });
 });
+
 
 app.post('/login-user', (req, res) => {
     const { email, password } = req.body;
@@ -71,14 +72,16 @@ app.post('/login-user', (req, res) => {
           email: email,
           password: password
       })
-      .then(data => {
-          if (data.length) {
-              res.json(data[0]);
-          } else {
-              res.json('email or password is incorrect');
-          }
-      });
-});
+     .then(data => {
+    if (data.length) {
+        // ✅ SUCCESS
+        res.json(data[0]);
+    } else {
+        // ❌ ERROR
+        res.json({ error: "Email or password is incorrect" });
+      }
+    });
+  });
 
 // ---------- START SERVER ----------
 

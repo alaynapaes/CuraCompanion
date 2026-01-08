@@ -3,91 +3,74 @@ function showAlert(msg) {
     alertBox.querySelector('.alert').innerText = msg;
     alertBox.style.top = "0";
 
-    // hide after 3 seconds
     setTimeout(() => {
         alertBox.style.top = "-100%";
     }, 3000);
 }
 
-// TEST IT
-//showAlert("Hello! This is a test alert.");
-
-window.onload = () => {
-    if (sessionStorage.name && window.location.pathname === '/login'){
-        location.href = '/';
+// 🔒 Prevent logged-in users from seeing login page
+window.addEventListener("DOMContentLoaded", () => {
+    if (sessionStorage.getItem("name") && window.location.pathname === "/login") {
+        window.location.href = "/";
     }
-}
+});
 
-
-// form validation
-const name = document.querySelector('.name') || null;
+// form elements
+const nameInput = document.querySelector('.name'); // signup only
 const email = document.querySelector('.email');
-const submitBtn = document.querySelector('.submit-btn');
 const password = document.querySelector('.password');
+const submitBtn = document.querySelector('.submit-btn');
 
-if (name == null) { // means login page is open
-    submitBtn.addEventListener('click', () => {   
-        fetch('/login-user', {
-            method: 'post',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({   
-                email: email.value,
-                password: password.value
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log("Login DATA:", data);
-            validateData(data, 'login');  // ✅ pass type
-        })
-        .catch(err => console.error(err));  
-    });
-} else { // means register page is open
+// 👉 LOGIN PAGE
+if (!nameInput) {
     submitBtn.addEventListener('click', () => {
-        fetch('/register-user', {
+        fetch('/login-user', {
             method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name: name.value,
                 email: email.value,
                 password: password.value
             })
         })
         .then(res => res.json())
         .then(data => {
-            validateData(data, 'register'); // ✅ pass type
+            validateData(data);
         })
         .catch(err => console.error(err));
     });
 }
 
-const validateData = (data, type) => {
-    if (!data.name) {
-        // show pink alert for errors
-        alertBox(data);
-    } else {
-        sessionStorage.name = data.name;
-        sessionStorage.email = data.email;
+// 👉 SIGNUP PAGE
+else {
+    submitBtn.addEventListener('click', () => {
+        fetch('/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: nameInput.value,
+                email: email.value,
+                password: password.value
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            validateData(data);
+        })
+        .catch(err => console.error(err));
+    });
+}
 
-        // show browser popup depending on type
-        if(type === 'login') {
-            alert("Login successful");
-        } else if(type === 'register') {
-            alert("Registration successful");
-        }
-
-        location.href = '/';   // redirect to home
+// ✅ HANDLE SERVER RESPONSE
+function validateData(data) {
+    if (data.error) {
+        showAlert(data.error);
+        return;
     }
-};
 
+    // ✅ SAVE USER SESSION
+    sessionStorage.setItem("name", data.name);
+    sessionStorage.setItem("email", data.email);
 
-const alertBox = (data) => {
-    const alertContainer = document.querySelector('.alert-box');
-    const alertMsg = document.querySelector('.alert');
-    alertMsg.innerHTML = data;
-
-    alertContainer.style.top = `5%`;
-    setTimeout(() => {
-        alertContainer.style.top = null;
-    }, 5000);
+    // ✅ REDIRECT TO HOME
+    window.location.href = "/";
 }
