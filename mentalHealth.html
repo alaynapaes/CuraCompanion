@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CuraCompanion - Mental Health</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header-footer.css">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: rgb(22, 197, 203);
+            --text-color: rgba(0, 0, 0, 1);
+            --secondary-text: rgba(89, 89, 89, 1);
+            --bg-color: #fff;
+            --light-color: rgb(195, 253, 255);
+            --font-family: "Figtree", sans-serif;
+        }
+
+        body {
+            margin-top: 100px;
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+
+        p {
+            color: var(--secondary-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 0px 0px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: var(--light-color);
+            border-radius: 12px;
+        }
+
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--secondary-text);
+        }
+
+        .emergency {
+            background: #ffecec;
+            border-left: 6px solid red;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 14px;
+        }
+
+        .cta p {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            <h1>Mental Health Support for Caregivers</h1>
+            <p>
+                Caring for a loved one can be emotionally exhausting. CuraCompanion provides
+                simple mental-wellness tools to help caregivers manage stress and prevent burnout.
+            </p>
+
+            <section class="section">
+                <h2>Quick Stress-Relief Tools</h2>
+
+                <div class="exercise">
+                    <h3>Guided Breathing (2 minutes)</h3>
+                    <p><strong>4-4-6 Breathing Technique:</strong></p>
+                    <ul>
+                        <li>Inhale for 4 seconds</li>
+                        <li>Hold for 4 seconds</li>
+                        <li>Exhale for 6 seconds</li>
+                    </ul>
+                </div>
+
+                <div class="exercise">
+                    <h3>Grounding Exercise</h3>
+                    <p><strong>5-4-3-2-1 Method:</strong></p>
+                    <ul>
+                        <li>5 things you can see</li>
+                        <li>4 things you can feel</li>
+                        <li>3 things you can hear</li>
+                        <li>2 things you can smell</li>
+                        <li>1 thing you can taste</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Wellness Video Library (Preview)</h2>
+                <ul>
+                    <li>Managing caregiver burnout</li>
+                    <li>Coping with stress and fatigue</li>
+                    <li>Taking breaks without guilt</li>
+                    <li>Simple relaxation techniques</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Self-Reflection Prompts</h2>
+                <ul>
+                    <li>What is one thing that stressed me today?</li>
+                    <li>Did I take any time for myself today?</li>
+                    <li>What support do I need right now?</li>
+                </ul>
+                <p><em>Save your reflections after logging in.</em></p>
+            </section>
+
+            <section class="section">
+                <h2>Frequently Asked Questions</h2>
+                <p><strong>What is caregiver burnout?</strong><br>
+                    Emotional and physical exhaustion caused by prolonged caregiving stress.</p>
+
+                <p><strong>Is this therapy?</strong><br>
+                    No. This platform provides general wellness support.</p>
+
+                <p><strong>When should I seek professional help?</strong><br>
+                    If stress or anxiety becomes persistent or overwhelming.</p>
+            </section>
+
+            <section class="emergency section">
+                <h2>Emergency Support</h2>
+                <p>If you are in immediate danger, please contact:</p>
+                <ul>
+                    <li><strong>Emergency Services (India):</strong> 112</li>
+                    <li><strong>Mental Health Helpline (Kiran):</strong> 1800-599-0019</li>
+                </ul>
+            </section>
+
+            <div class="cta">
+                <h2>Get Personalized Support</h2>
+                <p>
+                    Sign in to access mood tracking, guided meditations,
+                    and caregiver community support.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- JS -->
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+
+</body>
+</html>

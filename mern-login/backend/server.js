@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const knex = require('knex');
+const cors = require('cors'); 
 
 const db = knex({
     client: 'pg',
@@ -14,6 +16,12 @@ const db = knex({
 });
 
 const app = express();
+
+// Enable CORS for your Vercel frontend
+app.use(cors({
+    origin: "https://cura-campanion.vercel.app", // <-- your frontend URL
+    credentials: true
+}));
 
 // CORRECT PATH: backend → ../ → frontend
 let initialPath = path.join(__dirname, "..", "frontend");
@@ -51,15 +59,15 @@ app.post('/signup', (req, res) => {
     db("users")
       .insert({ name, email, password })
       .then(() => {
-          res.type("text").send("Signup successful");
+        res.json({ name, email });
       })
       .catch(err => {
-          if (err.detail && err.detail.includes('already exists')) {
-              res.type("text").send("Email already exists");
-          } else {
-              res.type("text").send("Error inserting user");
-          }
-      });
+        if (err.detail && err.detail.includes("already exists")) {
+            return res.json({ error: "Email already exists" });
+        } else {
+            return res.json({ error: "Signup failed" });
+        }
+    });
 });
 
 
