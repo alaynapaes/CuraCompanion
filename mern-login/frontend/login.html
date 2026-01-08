@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Page</title>
-  <style>@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');</style>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+  </style>
+
   <link rel="stylesheet" href="styles.css"/>
+
   <style>
     html, body {
       margin: 0;
@@ -22,12 +27,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url(signup_photo.png); 
+      background-image: url(signup_photo.png);
       background-position: center;
       filter: blur(8px);
       z-index: -2;
-    } 
-    
+    }
+
     .overlay {
       position: fixed;
       top: 0;
@@ -40,7 +45,7 @@
 
     .login-section {
       position: relative;
-      min-height: 90vh;   
+      min-height: 90vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -50,7 +55,7 @@
       position: relative;
       max-width: 350px;
       margin: auto;
-      background-color: #ffffff; 
+      background-color: #ffffff;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
@@ -87,83 +92,91 @@
     .login-box button:hover {
       background-color: #333333;
     }
-  
-  .top-right-home {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 999;   /* <-- important */
-  background-color: rgba(45, 206, 218, 0.8);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: 0.3s;
-}
 
+    .top-right-home {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+      background-color: rgba(45, 206, 218, 0.8);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+    }
 
-.top-right-home:hover {
-  background-color: #333;
-}
-
-    
+    .top-right-home:hover {
+      background-color: #333;
+    }
   </style>
 </head>
+
 <body>
-  <!-- NAVBAR -->
-  <div id="header"></div> 
 
-  <section class="login-section">
-    <div class="background"></div>
-    <div class="overlay"></div>
+<div id="header"></div>
 
-    <button class="top-right-home" onclick="window.location.href='/index.html'">Home</button>
+<section class="login-section">
+  <div class="background"></div>
+  <div class="overlay"></div>
 
-    <div class="login-box">
-      <h2>Login</h2>
-      <form action="/submit-signup" method="POST">
-        <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </section>
+ <button class="top-right-home" onclick="window.location.href='/index.html'">Home</button>
 
-  <div id="footer"></div>
+  <div class="login-box">
+    <h2>Login</h2>
 
-  <script src="header.js"></script>
-  <script src="footer.js"></script>
-  <script>
-    document.querySelector("form").addEventListener("submit", async (e) => {
-      e.preventDefault(); // stop page reload
-      const username = document.querySelector("#username").value;
-      const password = document.querySelector("#password").value;
+    <!-- ❌ action removed -->
+    <form id="loginForm">
+      <input type="text" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <a href="signup.html" class="link">Don't have an account? Register</a>
+    </form>
+  </div>
+</section>
 
-      try {
-        const response = await fetch("http://localhost:5000/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password })
-        });
+<div id="footer"></div>
 
-        const data = await response.json();
+<script src="header.js"></script>
+<script src="footer.js"></script>
 
-        if (response.ok) {
-          alert("Login successful!");
-          console.log(data);
-          // you can redirect to another page here
-          // window.location.href = "dashboard.html";
-        } else {
-          alert(data.message || "Invalid credentials");
-        }
-      } catch (error) {
-        console.error(error);
-        alert("Error connecting to server");
-      }
+<!-- ✅ ONLY NEW LOGIC -->
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+  e.preventDefault(); // stop page reload
+
+  const email = document.querySelector("input[name='email']").value;
+  const password = document.querySelector("input[name='password']").value;
+
+  try {
+    const response = await fetch("/login-user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
     });
-  </script>
+
+    const result = await response.json();
+
+    if (typeof result === "string") {
+      // backend error messages
+      if (result.includes("incorrect")) {
+        alert("Incorrect password");
+      } else {
+        alert("Email doesn't exist, signup first");
+      }
+    } else {
+      alert("Login successful");
+      window.location.href = "/home.html";
+    }
+
+  } catch (err) {
+    alert("Server error");
+  }
+});
+</script>
+
 </body>
 </html>
