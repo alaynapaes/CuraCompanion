@@ -24,7 +24,7 @@ const submitBtn = document.querySelector('.submit-btn');
 // 👉 LOGIN PAGE
 if (!nameInput) {
     submitBtn.addEventListener('click', () => {
-        fetch('/login-user', {
+fetch('https://curacompanion.onrender.com/login-user', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -43,7 +43,7 @@ if (!nameInput) {
 // 👉 SIGNUP PAGE
 else {
     submitBtn.addEventListener('click', () => {
-        fetch('/signup', {
+fetch('https://curacompanion.onrender.com/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
