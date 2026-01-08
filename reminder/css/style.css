@@ -1,9 +1,9 @@
 :root {
-  --bg: #fffaf6;
+  --bg: #e0f7f6;
   --card: #ffffff;
-  --accent: #9ad3d6; /* pastel teal */
-  --accent-2: #ffd6e0; /* pastel pink */
-  --muted: #6b6b6b;
+  --accent: #26c6da; /* pastel teal */
+  --accent-2: #00897b; /* pastel pink */
+  --muted: #5f6f73;
   --radius: 16px;
   --glass: rgba(255, 255, 255, 0.7);
   --shadow: 0 10px 25px rgba(38, 29, 55, 0.07);
@@ -39,7 +39,7 @@ main {
 /* NAVBAR */
 .navbar {
   width: 100%;
-  background: linear-gradient(90deg, rgba(154, 211, 214, 0.95), rgba(255, 214, 224, 0.95));
+  background: linear-gradient(90deg, #00897b, #26c6da);
   padding: 12px 18px;
   position: sticky;
   top: 0;
@@ -83,8 +83,8 @@ main {
 }
 
 .badge-shield {
-    background: #ffd6e7;        /* light pink */
-    color: #b30059;             /* dark pink text */
+    background: #b2ebf2;        /* light pink */
+    color: #048777;             /* dark pink text */
     padding: 10px 18px;
     border-radius: 12px 12px 25px 25px; /* shield shape */
     font-weight: bold;
@@ -92,7 +92,7 @@ main {
     text-align: center;
     display: inline-block;
     
-    border: 2px solid #ff9cc4;
+    border: 2px solid #26c6da;
     box-shadow: none;           /* remove white-looking shadow */
     
     background-clip: padding-box; /* remove background leak */

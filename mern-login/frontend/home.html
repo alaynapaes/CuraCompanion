@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Dosis:wght@400;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body{
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: url("extra_photo.png");
-            backdrop-filter: blur(3px);
-            background-size: cover;
-            background-position: center;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .container{
-            position: relative;
-            width: 90%;
-            height: 87vh;
-            border: 5px solid #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .logout{
-            position: absolute;
-            top: 10px;
-            right: 0;
-            padding: 10px 20px;
-            text-transform: capitalize;
-            font-size: 16px;
-            color: #000000;
-            background: none;
-            text-decoration: underline;
-            cursor: pointer;
-            outline: none;
-            border: none;
-        }
-
-        .greeting{
-            z-index: 1;
-            font-family: 'Dosis', sans-serif;
-            font-size: 100px;
-            color: #170202;
-            font-weight: 800;
-            text-transform: capitalize;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Health Monitoring Dashboard</title>
+  <link rel="stylesheet" href="home.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <div class="container">
-        <button class="logout">log out</button>
-        <h1 class="greeting"></h1>
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <div class="welcome-text">
+      <h2>Hello Kamya 👋</h2>
+      <p>Welcome to your health monitoring dashboard</p>
     </div>
 
-    <script src="home.js"></script>
+    <a href="/index.html">
+      <button class="logout-btn">Log out</button>
+    </a>
+  </div>
+</header>
+
+
+ 
+
+<!-- Reminder Section -->
+<section class="reminder-section">
+  <div class="reminder-box">
+    <h3>⏰ Set a Health Reminder</h3>
+    <p>
+      Stay consistent with your care. Set reminders for medication,
+      vitals check, or doctor visits.
+    </p>
+   <a href="/reminder/">
+        <button class="reminder">Reminder</button>
+    </a>
+  </div>
+</section>
+
+
+  <!-- Vital Cards -->
+  <div class="cards">
+    <div class="card">
+      <h3>Heart Rate</h3>
+      <p id="hrValue">-- bpm</p>
+    </div>
+    <div class="card">
+      <h3>Blood Pressure</h3>
+      <p id="bpValue">-- / --</p>
+    </div>
+    <div class="card">
+      <h3>Oxygen Level</h3>
+      <p id="spo2Value">-- %</p>
+    </div>
+  </div>
+
+  <!-- Input Form -->
+  <div class="form">
+    <input type="number" id="heartRate" placeholder="Heart Rate (bpm)">
+    <input type="text" id="bloodPressure" placeholder="BP (120/80)">
+    <input type="number" id="spo2" placeholder="SpO2 (%)">
+    <button onclick="addVitals()">Add Reading</button>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-container">
+    <canvas id="vitalChart"></canvas>
+  </div>
+</div>
+
+<script src="home.js"></script>
 </body>
 </html>
