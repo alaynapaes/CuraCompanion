@@ -1,0 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f4f4f4;
+}
+
+h2 {
+  text-align: center;
+}
+
+#pdf-upload-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#chat-window {
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#chat-header {
+  background: #4CAF50;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+#chat-input-area {
+  display: flex;
+  padding: 10px;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 5px;
+}
+
+#chat-input-area button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#chat-input-area button:hover {
+  background: #45a049;
+}
