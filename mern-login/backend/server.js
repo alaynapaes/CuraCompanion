@@ -121,6 +121,42 @@ app.post('/login-user', async (req, res) => {
         });
     }
 });
+app.post("/add-vitals", async (req, res) => {
+    const { email, heart_rate, blood_pressure, spo2 } = req.body;
+
+    if (!email || !heart_rate || !blood_pressure || !spo2) {
+        return res.json({ error: "Please provide all vitals" });
+    }
+
+    try {
+        await db("vitals").insert({
+            user_email: email.toLowerCase(),
+            heart_rate,
+            blood_pressure,
+            spo2
+        });
+
+        res.json({ success: true });
+    } catch (err) {
+        console.error("Error inserting vitals:", err);
+        res.json({ error: "Failed to save vitals" });
+    }
+});
+app.get("/get-vitals/:email", async (req, res) => {
+    const email = req.params.email.toLowerCase();
+
+    try {
+        const data = await db("vitals")
+            .select("time", "heart_rate", "blood_pressure", "spo2")
+            .where({ user_email: email })
+            .orderBy("time", "asc");
+
+        res.json({ vitals: data });
+    } catch (err) {
+        console.error("Error fetching vitals:", err);
+        res.json({ error: "Failed to fetch vitals" });
+    }
+});
 
 
 // ---------- START SERVER ----------
