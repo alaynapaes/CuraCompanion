@@ -19,7 +19,7 @@ const app = express();
 
 // Enable CORS for your Vercel frontend
 app.use(cors({
-    origin: "https://cura-campanion.vercel.app", // <-- your frontend URL
+    origin: "https://curacompanion.vercel.app", // <-- your frontend URL
     credentials: true
 }));
 
@@ -28,6 +28,8 @@ let initialPath = path.join(__dirname, "..", "frontend");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));  
+
+app.use(express.static(path.join(__dirname, "..", "..")));
 app.use(express.static(initialPath));
 
 // ---------- FRONTEND ROUTES ----------
@@ -71,25 +73,91 @@ app.post('/signup', (req, res) => {
 });
 
 
-app.post('/login-user', (req, res) => {
+app.post('/login-user', async (req, res) => {
     const { email, password } = req.body;
 
-    db.select('name', 'email')
-      .from('users')
-      .where({
-          email: email,
-          password: password
-      })
-     .then(data => {
-    if (data.length) {
-        // ✅ SUCCESS
-        res.json(data[0]);
-    } else {
-        // ❌ ERROR
-        res.json({ error: "Email or password is incorrect" });
-      }
-    });
-  });
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            message: "Email and password are required"
+        });
+    }
+
+    try {
+        const user = await db("users")
+            .select("name", "email", "password")
+            .where({ email })
+            .first();
+
+        // ❌ User not found (not signed up)
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: "Account does not exist. Please sign up."
+            });
+        }
+
+        // ❌ Wrong password
+        if (user.password !== password) {
+            return res.status(401).json({
+                success: false,
+                message: "Incorrect password"
+            });
+        }
+
+        // ✅ Login successful
+        return res.json({
+            success: true,
+            message: "Login successful",
+            name: user.name,
+            email: user.email
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
+});
+app.post("/add-vitals", async (req, res) => {
+    const { email, heart_rate, blood_pressure, spo2 } = req.body;
+
+    if (!email || !heart_rate || !blood_pressure || !spo2) {
+        return res.json({ error: "Please provide all vitals" });
+    }
+
+    try {
+        await db("vitals").insert({
+            user_email: email.toLowerCase(),
+            heart_rate,
+            blood_pressure,
+            spo2
+        });
+
+        res.json({ success: true });
+    } catch (err) {
+        console.error("Error inserting vitals:", err);
+        res.json({ error: "Failed to save vitals" });
+    }
+});
+app.get("/get-vitals/:email", async (req, res) => {
+    const email = req.params.email.toLowerCase();
+
+    try {
+        const data = await db("vitals")
+            .select("time", "heart_rate", "blood_pressure", "spo2")
+            .where({ user_email: email })
+            .orderBy("time", "asc");
+
+        res.json({ vitals: data });
+    } catch (err) {
+        console.error("Error fetching vitals:", err);
+        res.json({ error: "Failed to fetch vitals" });
+    }
+});
+
 
 // ---------- START SERVER ----------
 
