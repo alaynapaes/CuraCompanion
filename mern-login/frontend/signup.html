@@ -152,23 +152,26 @@ document.getElementById("signupForm").addEventListener("submit", async function(
   const password = document.querySelector("input[name='password']").value;
 
   try {
-    const response = await fetch("/signup", {
+      const response = await fetch("http://localhost:3000/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password })
     });
+  const data = await response.json();
 
-    const message = await response.text();
+    if (response.ok) {
+      // ✅ Save name in sessionStorage
+      sessionStorage.setItem("name", name);
+      sessionStorage.setItem("email", email);
 
-    // ✅ browser popup
-    alert(message);
-
-    // ✅ redirect ONLY on success
-    if (message === "Signup successful") {
-      window.location.href = "/home.html";
+      alert("Signup successful!");
+      window.location.href = "home.html"; // redirect to home
+    } else {
+      alert(data.error || "Signup failed");
     }
 
   } catch (err) {
+    console.error("Signup error:", err);
     alert("Server error");
   }
 });
