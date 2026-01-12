@@ -19,7 +19,7 @@ const app = express();
 
 // Enable CORS for your Vercel frontend
 app.use(cors({
-    origin: "https://cura-campanion.vercel.app", // <-- your frontend URL
+    origin: "https://curacompanion.vercel.app", // <-- your frontend URL
     credentials: true
 }));
 
@@ -28,6 +28,8 @@ let initialPath = path.join(__dirname, "..", "frontend");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));  
+
+app.use(express.static(path.join(__dirname, "..", "..")));
 app.use(express.static(initialPath));
 
 // ---------- FRONTEND ROUTES ----------
@@ -71,25 +73,55 @@ app.post('/signup', (req, res) => {
 });
 
 
-app.post('/login-user', (req, res) => {
+app.post('/login-user', async (req, res) => {
     const { email, password } = req.body;
 
-    db.select('name', 'email')
-      .from('users')
-      .where({
-          email: email,
-          password: password
-      })
-     .then(data => {
-    if (data.length) {
-        // ✅ SUCCESS
-        res.json(data[0]);
-    } else {
-        // ❌ ERROR
-        res.json({ error: "Email or password is incorrect" });
-      }
-    });
-  });
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            message: "Email and password are required"
+        });
+    }
+
+    try {
+        const user = await db("users")
+            .select("name", "email", "password")
+            .where({ email })
+            .first();
+
+        // ❌ User not found (not signed up)
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: "Account does not exist. Please sign up."
+            });
+        }
+
+        // ❌ Wrong password
+        if (user.password !== password) {
+            return res.status(401).json({
+                success: false,
+                message: "Incorrect password"
+            });
+        }
+
+        // ✅ Login successful
+        return res.json({
+            success: true,
+            message: "Login successful",
+            name: user.name,
+            email: user.email
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
+});
+
 
 // ---------- START SERVER ----------
 
