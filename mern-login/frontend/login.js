@@ -50,8 +50,8 @@ loginForm.addEventListener("submit", async (e) => {
         console.log("LOGIN RESPONSE:", data);
 
         // ❌ LOGIN FAILED
-        if (data.error) {
-            alert(data.error); // 🔔 popup
+        if (!data.success) {
+            alert(data.message); // 🔔 popup
             return;
         }
 

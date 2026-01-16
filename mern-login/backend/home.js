@@ -44,60 +44,76 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // ===== Load saved vitals for this user =====
-    function loadVitals(userEmail) {
-        const userData = JSON.parse(localStorage.getItem(userEmail));
-        if (!userData) return;
+function loadVitals(email) {
+    fetch(`http://localhost:3000/get-vitals/${email}`)
+        .then(res => res.json())
+        .then(data => {
+            if (!data.vitals || data.vitals.length === 0) return;
 
-        document.getElementById("hrValue").innerText = userData.hr[userData.hr.length - 1] + " bpm";
-        document.getElementById("bpValue").innerText = userData.bp[userData.bp.length - 1];
-        document.getElementById("spo2Value").innerText = userData.spo2[userData.spo2.length - 1] + " %";
+            vitalChart.data.labels = data.vitals.map(v =>
+                new Date(v.time).toLocaleTimeString()
+            );
 
-        vitalChart.data.labels = userData.labels;
-        vitalChart.data.datasets[0].data = userData.hr;
-        vitalChart.data.datasets[1].data = userData.spo2;
-        vitalChart.update();
-    }
+            vitalChart.data.datasets[0].data = data.vitals.map(v => v.heart_rate);
+            vitalChart.data.datasets[1].data = data.vitals.map(v => v.spo2);
+
+            const last = data.vitals[data.vitals.length - 1];
+            document.getElementById("hrValue").innerText = last.heart_rate + " bpm";
+            document.getElementById("bpValue").innerText = last.blood_pressure;
+            document.getElementById("spo2Value").innerText = last.spo2 + " %";
+
+            vitalChart.update();
+        })
+        .catch(err => console.error("Error loading vitals:", err));
+}
+
+
 
     // Load vitals for the currently logged-in user
     loadVitals(email);
 
     // ===== Add vitals function =====
-    window.addVitals = function() {
-        const hr = document.getElementById("heartRate").value;
-        const bp = document.getElementById("bloodPressure").value;
-        const spo2 = document.getElementById("spo2").value;
+window.addVitals = async function () {
+    const hr = document.getElementById("heartRate").value;
+    const bp = document.getElementById("bloodPressure").value;
+    const spo2 = document.getElementById("spo2").value;
 
-        if (!hr || !bp || !spo2) {
-            alert("Please enter all vitals");
+    if (!hr || !bp || !spo2) {
+        alert("Please enter all vitals");
+        return;
+    }
+
+    try {
+        const res = await fetch("http://localhost:3000/add-vitals", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email,
+                heart_rate: hr,
+                blood_pressure: bp,
+                spo2
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+            alert(data.error);
             return;
         }
 
-        const time = new Date().toLocaleTimeString();
+        // ✅ Reload from DB after save
+        loadVitals(email);
 
-        // Update UI
-        document.getElementById("hrValue").innerText = hr + " bpm";
-        document.getElementById("bpValue").innerText = bp;
-        document.getElementById("spo2Value").innerText = spo2 + " %";
-
-        // Update chart
-        vitalChart.data.labels.push(time);
-        vitalChart.data.datasets[0].data.push(hr);
-        vitalChart.data.datasets[1].data.push(spo2);
-        vitalChart.update();
-
-        // Save vitals per user in localStorage
-        let userData = JSON.parse(localStorage.getItem(email)) || { labels: [], hr: [], spo2: [], bp: [] };
-        userData.labels.push(time);
-        userData.hr.push(hr);
-        userData.spo2.push(spo2);
-        userData.bp.push(bp);
-        localStorage.setItem(email, JSON.stringify(userData));
-
-        // Clear input fields
         document.getElementById("heartRate").value = "";
         document.getElementById("bloodPressure").value = "";
         document.getElementById("spo2").value = "";
-    };
+
+    } catch (err) {
+        console.error("Error saving vitals:", err);
+    }
+};
+
 
     // ===== Logout functionality =====
     logoutBtn.addEventListener("click", () => {
